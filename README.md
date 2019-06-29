@@ -6,7 +6,7 @@ run ```docker-composer up -d```, then backend available on ```localhost```
 
 ### Frontend
 
-Directory: frontend
+Directory: frontendApp
 
 ```yarn install```
 
