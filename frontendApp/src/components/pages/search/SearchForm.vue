@@ -76,7 +76,7 @@
       </b-col>
       <b-col cols="3" class="actions">
         <div class="w-75">
-          <b-button variant="dark" block>Search Now</b-button>
+          <b-button variant="dark" block @click.prevent="startSearch">Search Now</b-button>
         </div>
       </b-col>
     </b-row>
@@ -137,6 +137,10 @@
           this.formData.kyc = value;
         }
       },
+
+      startSearch(){
+        this.$emit('search', {...this.$data})
+      }
     },
   };
 </script>
