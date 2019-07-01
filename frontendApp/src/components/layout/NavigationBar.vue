@@ -8,7 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item href="#" class="btn btn-sm btn-transparent active ml-3">Onboarding</b-nav-item>
-                    <b-nav-item href="#" class="btn btn-sm btn-transparent ml-2">Monitoring</b-nav-item>
+                    <b-nav-item href="#" class="btn btn-sm btn-transparent">Monitoring</b-nav-item>
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
