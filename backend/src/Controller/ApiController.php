@@ -35,7 +35,7 @@ class ApiController
             // TODO: add validation
 
             // TO DEBUG - delete
-            $filter['name'] = 'judy b TEST02';
+//            $filter['name'] = 'judy b TEST02';
 
             $requestData = $verifyRequest->create($filter);
 //            die(var_dump($requestData));

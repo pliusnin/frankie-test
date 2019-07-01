@@ -41,7 +41,7 @@
           </b-col>
           <b-col cols="4">
             <label for="dob">Date of Birth (optional)</label>
-            <b-form-input id="dob" type="text" placeholder="YYYY-MM-DD" v-model="formData.dob"></b-form-input>
+            <b-form-input id="dob" type="date" placeholder="YYYY-MM-DD" v-model="formData.dob"></b-form-input>
           </b-col>
         </b-row>
         
@@ -159,29 +159,15 @@
 
         if (!data.name) {
           this.errors.name = false;
+
           return;
         }
 
         this.errors.name = null;
 
-        const name = data.name.split(' ');
-
         delete data.kyc;
         delete data.aml;
-        delete data.name;
 
-        if (name.length) {
-          data.firstName = name.shift();
-
-          if (name.length) {
-            data.lastName = name.pop();
-          }
-
-          if (name.length) {
-            data.middleName = name.join(' ');
-          }
-        }
-        
         this.$emit('search', data)
       }
     },
