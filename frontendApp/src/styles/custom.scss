@@ -3,7 +3,7 @@
 }
 
 .logo {
-  font-size: 2rem!important;
+  font-size: 2rem !important;
 }
 
 .navbar-nav {
@@ -84,4 +84,12 @@
       color: $dark;
     }
   }
+}
+
+.vs__search, .vs__search:focus {
+  color: #495057;
+}
+
+.vs--searchable .vs__dropdown-toggle{
+  padding: 4px 12px;
 }

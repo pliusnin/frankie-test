@@ -19,7 +19,8 @@
     </b-row>
     
     <b-row>
-      <b-col>Name and details</b-col>
+      <b-col>Name and details
+      </b-col>
     </b-row>
     
     <b-row>
@@ -27,14 +28,16 @@
         <b-row>
           <b-col cols="4">
             <label for="name">Name</label>
-            <b-form-input id="name" type="text" placeholder="Name" v-model="formData.name"></b-form-input>
+            <b-form-input id="name"
+              type="text"
+              placeholder="Name"
+              v-model="formData.name"
+              :state="errors.name">
+            </b-form-input>
           </b-col>
           <b-col cols="4">
             <label for="nationality">Nationality (optional)</label>
-            <b-form-input id="nationality"
-              type="text"
-              placeholder="Nationality"
-              v-model="formData.nationality"></b-form-input>
+            <country-select id="nationality" v-model="formData.nationality"/>
           </b-col>
           <b-col cols="4">
             <label for="dob">Date of Birth (optional)</label>
@@ -49,11 +52,14 @@
           </b-col>
           <b-col cols="4">
             <label for="docType">ID Type (optional)</label>
-            <b-form-input id="docType" type="text" placeholder="Document" v-model="formData.docType"></b-form-input>
+            <b-form-select id="docType"
+              :options="docTypes"
+              placeholder="Document"
+              v-model="formData.docType" />
           </b-col>
           <b-col cols="4">
             <label for="docNumber">Document Number (optional)</label>
-            <b-form-input id="docNumber" type="text" placeholder="Number" v-model="formData.docNumber"></b-form-input>
+            <b-form-input id="docNumber" type="text" placeholder="Number" v-model="formData.docNumber" />
           </b-col>
         </b-row>
         
@@ -84,11 +90,12 @@
 </template>
 
 <script>
+  import CountrySelect from './CountrySelect';
   import SearchSwitch from './SearchSwitch';
 
   export default {
     name: 'search-form',
-    components: { SearchSwitch },
+    components: { CountrySelect, SearchSwitch },
     data() {
       return {
         formData: {
@@ -115,6 +122,15 @@
           { value: 0.9, text: '10%' },
           { value: 1, text: 'Exact Match' },
         ],
+        docTypes: [
+          { value: '', text: '' },
+          { value: 'DRIVERS_LICENCE', text: 'Drivers Licence' },
+          { value: 'PASSPORT', text: 'Passport' },
+          { value: 'NATIONAL_HEALTH_ID', text: 'Medicare Card' },
+        ],
+        errors: {
+          name: null,
+        },
       };
     },
     methods: {
@@ -138,8 +154,35 @@
         }
       },
 
-      startSearch(){
-        this.$emit('search', {...this.$data})
+      startSearch() {
+        const data = { ...this.formData };
+
+        if (!data.name) {
+          this.errors.name = false;
+          return;
+        }
+
+        this.errors.name = null;
+
+        const name = data.name.split(' ');
+
+        delete data.kyc;
+        delete data.aml;
+        delete data.name;
+
+        if (name.length) {
+          data.firstName = name.shift();
+
+          if (name.length) {
+            data.lastName = name.pop();
+          }
+
+          if (name.length) {
+            data.middleName = name.join(' ');
+          }
+        }
+        
+        this.$emit('search', data)
       }
     },
   };
