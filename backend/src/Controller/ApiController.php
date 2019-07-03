@@ -22,7 +22,7 @@ class ApiController
      * @return JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      *
-     * @Route("/api/v1/search")
+     * @Route("/v1/search")
      */
     public function index(VerifyRequest $verifyRequest, Request $request)
     {
@@ -34,11 +34,7 @@ class ApiController
             $filter = \json_decode($request->getContent(), 1);
             // TODO: add validation
 
-            // TO DEBUG - delete
-//            $filter['name'] = 'judy b TEST02';
-
             $requestData = $verifyRequest->create($filter);
-//            die(var_dump($requestData));
         } catch (\Exception $e) {
             return $this->errorResponse('Request error', ['message' => $e->getMessage()]);
         }

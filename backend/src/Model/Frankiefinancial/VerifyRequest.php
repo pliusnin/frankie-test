@@ -25,6 +25,36 @@ class VerifyRequest
             $this->parseName($filter['name']);
         }
 
+        $address = $identityDoc = [];
+        if (isset($filter['nationality']) && strlen($filter['nationality']) > 0) {
+            $address['country'] = $filter['nationality'];
+            $identityDoc['country'] = $filter['nationality'];
+        }
+
+        if (isset($filter['address']) && strlen($filter['address']) > 0) {
+            $address['longForm'] = $filter['address'];
+        }
+
+        if (isset($filter['dob']) && strlen($filter['dob']) > 0) {
+            $this->entity['dateOfBirth']['dateOfBirth'] = $filter['dob'];
+        }
+
+        if (isset($filter['docType']) && strlen($filter['docType']) > 0) {
+            $identityDoc['idType'] = $filter['docType'];
+        }
+
+        if (isset($filter['docNumber']) && strlen($filter['docNumber']) > 0) {
+            $identityDoc['idNumber'] = $filter['docNumber'];
+        }
+
+        if (count($address) > 0) {
+            $this->entity['addresses'][] = $address;
+        }
+
+        if (count($identityDoc) > 0) {
+            $this->entity['identityDocs'][] = $identityDoc;
+        }
+
         return $this->getRequest();
     }
 

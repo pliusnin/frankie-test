@@ -1,7 +1,10 @@
 <template>
   <b-container fluid class="border-bottom pb-5">
-    <b-row>
-      <b-col cols="12">
+    <b-row class="f1">
+      <b-col cols="4">
+        <span class="Name-and-Details">Name and details</span>
+      </b-col>
+      <b-col cols="8">
         <search-switch
           :checked="formData.aml"
           name="check-button"
@@ -17,12 +20,7 @@
         <div class="float-right pr-2">KYC</div>
       </b-col>
     </b-row>
-    
-    <b-row>
-      <b-col>Name and details
-      </b-col>
-    </b-row>
-    
+
     <b-row>
       <b-col cols="9">
         <b-row>
@@ -45,7 +43,7 @@
           </b-col>
         </b-row>
         
-        <b-row v-if="formData.kyc">
+        <b-row v-if="formData.kyc" style="padding-top: 35px;">
           <b-col cols="4">
             <label for="address">Home Address (optional)</label>
             <b-form-input id="address" type="text" placeholder="Address" v-model="formData.address"></b-form-input>
@@ -64,14 +62,14 @@
         </b-row>
         
         <b-row v-if="formData.aml">
-          <b-col cols="9">
+          <b-col cols="9" style="padding-top: 40px;">
             <b-row>
-              <b-col cols="12">Fuziness (AML check only)</b-col>
+              <b-col cols="12" class="Fuzziness-interval">Fuziness</b-col>
               <b-col cols="4">
                 <label for="fuziness">Fuziness interval</label>
                 <b-form-select id="fuziness" :options="fuzOptions" v-model="formData.fuziness"></b-form-select>
               </b-col>
-              <b-col cols="8" class="pt-4">
+              <b-col cols="8" class="pt-4 Level-of-flexibility">
                 Level of flexibility of search (0% will check for exact matches only; 100% will look for results with
                 even
                 the slightest match in spelling and phonetics)

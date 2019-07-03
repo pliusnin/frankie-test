@@ -9,7 +9,7 @@ import vSelect from 'vue-select'
 import './styles/app.scss'
 
 const client = axios.create({
-  baseURL: 'http://localhost',
+  baseURL: 'http://frankie.symfonyart.com',
 });
 
 Vue.use(vueAxios, client);
